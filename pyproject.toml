@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minimal-agent-harness"
+version = "0.1.0"
+description = "Framework-free agent runtime with durable sessions and tool traces"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+web = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+test-web = ["httpx>=0.27,<1"]
+
+[project.scripts]
+minimal-agent = "agent_harness.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["agent_harness*"]
+
+[tool.setuptools.package-data]
+agent_harness = ["static/*"]

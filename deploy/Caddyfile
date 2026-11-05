@@ -1,0 +1,7 @@
+yehuodeshenming.site {
+    encode gzip
+    reverse_proxy 127.0.0.1:8000
+}
+www.yehuodeshenming.site {
+    redir https://yehuodeshenming.site{uri} permanent
+}

@@ -1,0 +1,22 @@
+[Unit]
+Description=Minimal Agent web demo
+After=network-online.target
+Wants=network-online.target
+[Service]
+User=agentweb
+Group=agentweb
+WorkingDirectory=/opt/minimal-agent
+EnvironmentFile=/etc/minimal-agent.env
+ExecStart=/opt/minimal-agent/.venv/bin/uvicorn agent_harness.web:create_app --factory --host 127.0.0.1 --port 8000 --workers 1 --proxy-headers --forwarded-allow-ips=127.0.0.1 --limit-concurrency 64
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/minimal-agent
+MemoryMax=768M
+TasksMax=64
+[Install]
+WantedBy=multi-user.target

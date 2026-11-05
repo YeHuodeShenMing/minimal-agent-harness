@@ -1,0 +1,15 @@
+services:
+  agent:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file: .env
+    environment:
+      COOKIE_SECURE: "0"
+      WEB_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      AGENT_DB: /app/data/web.db
+    volumes:
+      - agent_data:/app/data
+    restart: unless-stopped
+volumes:
+  agent_data:
